@@ -1,6 +1,14 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+
 body {
   margin: 0;
   display: flex;
   min-width: 320px;
   min-height: 100vh;
+}
+
+.title-game {
+  font-size: 4rem;
+  font-family: 'Amatic SC', cursive;
 }

@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { useForm } from "../hooks/useForm";
+import { useNavigate } from "react-router-dom";
 
 export const StartingPage = () => {
 
     const inputRef = useRef();
+    const navigate = useNavigate();
 
     const {
         username = "",
@@ -23,6 +25,7 @@ export const StartingPage = () => {
     const handleClick = (e) => {
         e.preventDefault();
         localStorage.setItem("username", username?.toLowerCase());
+        navigate("/menu", { replace: true });
     }
 
     return (
