@@ -35,6 +35,7 @@ export const StartingPage = () => {
                     placeholder="Your name here"
                     name="username"
                     value={username}
+                    spellCheck={false}
                     onChange={onInputChange}
                 />
                 <button
