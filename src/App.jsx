@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { JoinPage } from "./pages/JoinPage";
 import { MenuPage } from "./pages/MenuPage";
 import { StartingPage } from "./pages/StartingPage";
 
@@ -12,6 +13,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<StartingPage />} />
                     <Route path="/menu" element={<MenuPage />} />
+                    <Route path="/join" element={<JoinPage />} />
                 </Routes>
             </div>
         </>

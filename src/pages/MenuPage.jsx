@@ -14,6 +14,7 @@ export const MenuPage = () => {
     }
 
     const handleJoinGameClick = () => {
+        navigate("/join", { replace: true });
     }
 
     const handleTrainingClick = () => {
