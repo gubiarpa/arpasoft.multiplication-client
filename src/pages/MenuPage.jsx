@@ -13,6 +13,7 @@ export const MenuPage = () => {
     }, []);
 
     const handleCreateGameClick = () => {
+        navigate("/create", { replace: true });
     }
 
     const handleJoinGameClick = () => {
