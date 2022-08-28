@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { CreatePage } from "./pages/CreatePage";
 import { JoinPage } from "./pages/JoinPage";
 import { MenuPage } from "./pages/MenuPage";
 import { StartingPage } from "./pages/StartingPage";
@@ -11,9 +12,22 @@ function App() {
                     <h1 className="title-game">Yan-Ken-Po!</h1>
                 </div>
                 <Routes>
-                    <Route path="/" element={<StartingPage />} />
-                    <Route path="/menu" element={<MenuPage />} />
-                    <Route path="/join" element={<JoinPage />} />
+                    <Route
+                        path="/"
+                        element={<StartingPage />}
+                    />
+                    <Route
+                        path="/menu"
+                        element={<MenuPage />}
+                    />
+                    <Route
+                        path="/create"
+                        element={<CreatePage />}
+                    />
+                    <Route
+                        path="/join"
+                        element={<JoinPage />}
+                    />
                 </Routes>
             </div>
         </>

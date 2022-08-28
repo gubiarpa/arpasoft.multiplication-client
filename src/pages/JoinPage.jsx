@@ -11,6 +11,10 @@ export const JoinPage = () => {
     const [username, setUsername] = useState("");
     const [joinCode, setJoinCode] = useState("");
 
+    useEffect(() => {
+        setUsername(() => (localStorage.getItem("username") ?? ""));
+    }, []);
+
     const addJoinNumber = (joinNumber) => {
         if (joinCode.length < 4) {
             setJoinCode(code => `${code}${joinNumber}`);
@@ -57,10 +61,6 @@ export const JoinPage = () => {
             }
         ]
     ];
-
-    useEffect(() => {
-        setUsername(() => (localStorage.getItem("username") ?? ""));
-    }, []);
 
     return (
         <>
