@@ -31,29 +31,29 @@ export const MenuPage = () => {
                     Hi, <span className="text-capitalize">{username}</span>!
                 </label>
                 <button
-                    className="btn btn-outline-primary mt-3 col-12"
+                    className="btn btn-outline-primary mt-3 col-12 fs-3"
                     onClick={handleCreateGameClick}
                 >
                     Create Game
                 </button>
                 <button
-                    className="btn btn-outline-primary mt-3 col-12"
+                    className="btn btn-outline-primary mt-3 col-12 fs-3"
                     onClick={handleJoinGameClick}
                 >
                     Join Game
                 </button>
                 <button
-                    className="btn btn-outline-primary mt-3 col-12"
+                    className="btn btn-outline-primary mt-3 col-12 fs-3"
                     onClick={handleTrainingClick}
                 >
                     Training
                 </button>
-                <hr/>
+                <hr />
                 <button
-                    className="btn btn-outline-secondary mt-3 col-12"
+                    className="btn btn-outline-secondary mt-3 col-12 fs-3"
                     onClick={handleBackClick}
                 >
-                    Back
+                    My Name
                 </button>
             </form>
         </div>

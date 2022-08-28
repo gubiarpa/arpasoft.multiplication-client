@@ -34,7 +34,7 @@ export const StartingPage = () => {
                 <input
                     ref={inputRef}
                     type="text"
-                    className="form-control text-center mt-3 text-lowercase"
+                    className="form-control text-center mt-3 text-lowercase fs-2"
                     placeholder="Your name here"
                     name="username"
                     value={username}
@@ -42,7 +42,7 @@ export const StartingPage = () => {
                     onChange={onInputChange}
                 />
                 <button
-                    className="btn btn-outline-primary mt-3 col-12"
+                    className="btn btn-outline-primary mt-3 col-12 fs-3"
                     onClick={handleClick}
                     disabled={isValidUser() ? "" : "disabled"}
                 >

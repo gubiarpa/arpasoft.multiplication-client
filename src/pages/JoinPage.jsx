@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { JoinNumber } from "../components/JoinNumber";
+import { JoinMatrix } from "../components/JoinMatrix";
+import TypeJoinNumberButtonData from "../Constants/TypeJoinNumberButton";
+import { useNavigate } from "react-router-dom";
 
 export const JoinPage = () => {
 
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [joinCode, setJoinCode] = useState("");
 
@@ -12,39 +15,36 @@ export const JoinPage = () => {
         }
     }
 
-    const renderJoinCodeMatrix = (arr = []) => {
-
-        const renderJoinCodeRow = (arr = []) => {
-            return arr.map(({ caption, action }) => <JoinNumber key={caption} caption={caption} action={action} />);
+    const deleteJoinNumber = () => {
+        if (joinCode.length > 0) {
+            setJoinCode(code => code.substring(0, code.length - 1));
         }
+    }
 
-        return arr.map(row => (
-            <div className="text-center my-4">
-                {renderJoinCodeRow(row)}
-            </div>
-        ));
+    const handleBackClick = () => {
+        navigate("/menu", { replace: true });
     }
 
     const joinCodeMatrix = [
         [
-            { caption: "1", action: addJoinNumber },
-            { caption: "2", action: addJoinNumber },
-            { caption: "3", action: addJoinNumber }
+            { caption: "1", action: () => addJoinNumber(1) },
+            { caption: "2", action: () => addJoinNumber(2) },
+            { caption: "3", action: () => addJoinNumber(3) }
         ],
         [
-            { caption: "4", action: addJoinNumber },
-            { caption: "5", action: addJoinNumber },
-            { caption: "6", action: addJoinNumber }
+            { caption: "4", action: () => addJoinNumber(4) },
+            { caption: "5", action: () => addJoinNumber(5) },
+            { caption: "6", action: () => addJoinNumber(6) }
         ],
         [
-            { caption: "7", action: addJoinNumber },
-            { caption: "8", action: addJoinNumber },
-            { caption: "9", action: addJoinNumber }
+            { caption: "7", action: () => addJoinNumber(7) },
+            { caption: "8", action: () => addJoinNumber(8) },
+            { caption: "9", action: () => addJoinNumber(9) }
         ],
         [
-            { caption: "C", action: addJoinNumber },
-            { caption: "0", action: addJoinNumber },
-            { caption: "Back", action: addJoinNumber }
+            { caption: "C", action: () => deleteJoinNumber(), typeJoinNumberButton: TypeJoinNumberButtonData.Danger },
+            { caption: "0", action: () => addJoinNumber(0) },
+            { caption: "◄", action: () => handleBackClick(), typeJoinNumberButton: TypeJoinNumberButtonData.Secondary }
         ]
     ];
 
@@ -67,7 +67,7 @@ export const JoinPage = () => {
                     />
                 </div>
                 <br />
-                {renderJoinCodeMatrix(joinCodeMatrix)}
+                <JoinMatrix joinCodeMatrix={joinCodeMatrix} />
             </div>
         </>
     );
