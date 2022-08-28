@@ -12,3 +12,8 @@ body {
   font-size: 4rem;
   font-family: 'Amatic SC', cursive;
 }
+
+.join-code {
+  letter-spacing: 3rem;
+  padding-left: 3rem;
+}
