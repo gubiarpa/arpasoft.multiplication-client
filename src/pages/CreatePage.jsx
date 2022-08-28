@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeftRotate } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeftRotate, faRunning } from "@fortawesome/free-solid-svg-icons";
 
 export const CreatePage = () => {
 
@@ -11,9 +11,13 @@ export const CreatePage = () => {
     const [factor2, setFactor2] = useState(12);
 
     useEffect(() => {
-        setRoomCode(() => (Math.floor(Math.random() * 9999)));
-    }, [])
+        const randomNumber = localStorage.getItem("roomcode") ?? (1000 + Math.floor(Math.random() * 8999));
+        setRoomCode(() => randomNumber);
+    }, []);
 
+    useEffect(() => {
+        localStorage.setItem("roomcode", roomCode);
+    }, [roomCode]);
 
     const handleChangeFactor1 = ({ target }) => {
         setFactor1(target.value);
@@ -24,7 +28,7 @@ export const CreatePage = () => {
     }
 
     const handleContinueClick = () => {
-        navigate("/", { replace: true });
+        navigate("/admit", { replace: true });
     }
 
     const handleBackClick = () => {
@@ -71,10 +75,10 @@ export const CreatePage = () => {
 
                 <div>
                     <button
-                        className="btn btn-outline-primary mt-3 col-12 fs-3"
+                        className="btn btn-outline-success mt-4 col-12 fs-3"
                         onClick={handleContinueClick}
                     >
-                        Continue
+                        <FontAwesomeIcon icon={faRunning} /> Continue
                     </button>
                     <button
                         className="btn btn-outline-secondary mt-3 col-12 fs-3"
