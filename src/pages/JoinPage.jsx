@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { JoinMatrix } from "../components/JoinMatrix";
 import TypeJoinNumberButtonData from "../Constants/TypeJoinNumberButton";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDoubleLeft, faArrowLeftRotate } from "@fortawesome/free-solid-svg-icons";
 
 export const JoinPage = () => {
 
@@ -42,9 +44,17 @@ export const JoinPage = () => {
             { caption: "9", action: () => addJoinNumber(9) }
         ],
         [
-            { caption: "C", action: () => deleteJoinNumber(), typeJoinNumberButton: TypeJoinNumberButtonData.Danger },
+            {
+                caption: <FontAwesomeIcon icon={faAngleDoubleLeft} />,
+                action: () => deleteJoinNumber(),
+                typeJoinNumberButton: TypeJoinNumberButtonData.Danger
+            },
             { caption: "0", action: () => addJoinNumber(0) },
-            { caption: "◄", action: () => handleBackClick(), typeJoinNumberButton: TypeJoinNumberButtonData.Secondary }
+            {
+                caption: <FontAwesomeIcon icon={faArrowLeftRotate} />,
+                action: () => handleBackClick(),
+                typeJoinNumberButton: TypeJoinNumberButtonData.Secondary
+            }
         ]
     ];
 
