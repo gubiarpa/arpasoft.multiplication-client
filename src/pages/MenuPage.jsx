@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeftRotate } from "@fortawesome/free-solid-svg-icons";
 
 export const MenuPage = () => {
 
@@ -53,7 +55,7 @@ export const MenuPage = () => {
                     className="btn btn-outline-secondary mt-3 col-12 fs-3"
                     onClick={handleBackClick}
                 >
-                    My Name
+                    <FontAwesomeIcon icon={faArrowLeftRotate} /> Back
                 </button>
             </form>
         </div>
