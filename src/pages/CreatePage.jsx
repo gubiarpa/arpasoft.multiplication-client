@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftRotate, faRunning } from "@fortawesome/free-solid-svg-icons";
+import SetupFactors from "../components/SetupFactors";
 
 export const CreatePage = () => {
 
@@ -41,36 +42,12 @@ export const CreatePage = () => {
                 <div className="fs-1 text-secondary text-reset">
                     Room <span className="fs-3">({roomCode})</span>
                 </div>
-                <div className="my-5">
-                    <label
-                        className="form-label fs-2"
-                    >
-                        Factor 1 <span className="fs-5 text-secondary">(hasta la tabla del {factor1})</span>
-                    </label>
-                    <input
-                        type="range"
-                        className="form-range fs-4"
-                        min={2}
-                        max={12}
-                        onChange={handleChangeFactor1}
-                        value={factor1}
-                    />
-                </div>
-                <div className="my-5">
-                    <label
-                        className="form-label fs-2"
-                    >
-                        Factor 2 <span className="fs-5 text-secondary">(hasta la tabla del {factor2})</span>
-                    </label>
-                    <input
-                        type="range"
-                        className="form-range fs-4"
-                        min={9}
-                        max={12}
-                        onChange={handleChangeFactor2}
-                        value={factor2}
-                    />
-                </div>
+                <SetupFactors
+                    factor1={factor1}
+                    handleChangeFactor1={handleChangeFactor1}
+                    factor2={factor2}
+                    handleChangeFactor2={handleChangeFactor2}
+                />
                 <hr />
 
                 <div>
