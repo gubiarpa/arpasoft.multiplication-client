@@ -24,7 +24,7 @@ export const StartingPage = () => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        localStorage.setItem("username", username?.toLowerCase());
+        localStorage.setItem("username", username?.trim().toLocaleLowerCase());
         navigate("/menu", { replace: true });
     }
 
