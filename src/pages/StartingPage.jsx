@@ -1,8 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
+
+import { GameContext } from "../context/GameContext";
 import { useForm } from "../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 
 export const StartingPage = () => {
+
+    const { game, setGameUser } = useContext(GameContext);
 
     const inputRef = useRef();
     const navigate = useNavigate();
@@ -16,7 +20,7 @@ export const StartingPage = () => {
     });
 
     useEffect(() => {
-        setFieldState({ name: "username", value: localStorage.getItem("username") ?? "" });
+        setFieldState({ name: "username", value: game.user });
         inputRef.current.select();
     }, []);
 
@@ -24,7 +28,7 @@ export const StartingPage = () => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        localStorage.setItem("username", username?.toLowerCase());
+        setGameUser(username);
         navigate("/menu", { replace: true });
     }
 

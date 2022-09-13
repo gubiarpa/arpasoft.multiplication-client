@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { JoinMatrix } from "../components/JoinMatrix";
-import TypeJoinNumberButtonData from "../Constants/TypeJoinNumberButton";
-import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext, useEffect, useState } from "react";
 import { faAngleDoubleLeft, faArrowLeftRotate } from "@fortawesome/free-solid-svg-icons";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { GameContext } from "../context/GameContext";
+import { JoinMatrix } from "../components/JoinMatrix";
+import { TitleForm } from "../components/TitleForm";
+import TypeJoinNumberButtonData from "../Constants/TypeJoinNumberButton";
+import { mainStyle } from "../Constants/DefinedClasses";
+import { useNavigate } from "react-router-dom";
 
 export const JoinPage = () => {
 
-    const navigate = useNavigate();
-    const [username, setUsername] = useState("");
-    const [joinCode, setJoinCode] = useState("");
+    const { game } = useContext(GameContext);
 
-    useEffect(() => {
-        setUsername(() => (localStorage.getItem("username") ?? ""));
-    }, []);
+    const navigate = useNavigate();
+    const [joinCode, setJoinCode] = useState("");
 
     const addJoinNumber = (joinNumber) => {
         if (joinCode.length < 4) {
@@ -64,13 +65,17 @@ export const JoinPage = () => {
 
     return (
         <>
-            <div className="position-absolute top-50 start-50 translate-middle col-10 col-md-4">
-                <label className="fs-2 mb-3">
-                    Hi, <span className="text-capitalize">{username}</span>!
-                </label>
+            <div className={mainStyle}>
+                <TitleForm
+                    content={
+                        <>
+                            Let's join, <span className="text-capitalize">{game.user}</span>!
+                        </>
+                    }
+                />
                 <div className="mt-4">
                     <input
-                        className="join-code form-control form-control-lg text-center"
+                        className="join-code form-control form-control-lg text-center fs-2"
                         type="text"
                         value={joinCode}
                         readOnly={true}
