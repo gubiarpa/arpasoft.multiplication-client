@@ -1,5 +1,5 @@
 import { FACTOR_1_DEFAULT, FACTOR_2_DEFAULT } from "../Constants/GameParameters";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { ActionStep } from "../components/ActionStep";
 import { GameContext } from "../context/GameContext";
@@ -8,14 +8,34 @@ import { TitleForm } from "../components/TitleForm";
 import { mainStyle } from "../Constants/DefinedClasses";
 import { useNavigate } from "react-router-dom";
 
-export const SetupTrainingPage = ({ fa }) => {
+export const SetupTrainingPage = () => {
 
-    const { game } = useContext(GameContext);
+    const { game, setGameFactor1, setGameFactor2 } = useContext(GameContext);
 
     const navigate = useNavigate();
 
     const [factor1, setFactor1] = useState(FACTOR_1_DEFAULT);
     const [factor2, setFactor2] = useState(FACTOR_2_DEFAULT);
+
+    useEffect(() => {
+        if (!game.user) {
+            navigate("/", { replace: true });
+        }
+        if (!game.factor1) {
+            setGameFactor1(FACTOR_1_DEFAULT);
+        }
+        if (!game.factor2) {
+            setGameFactor2(FACTOR_2_DEFAULT);
+        }
+    }, []);
+
+    useEffect(() => {
+        setGameFactor1(factor1);
+    }, [factor1]);
+
+    useEffect(() => {
+        setGameFactor2(factor2);
+    }, [factor2]);
 
     const handleContinueClick = () => {
         navigate("/admit", { replace: true });
@@ -36,9 +56,9 @@ export const SetupTrainingPage = ({ fa }) => {
                     }
                 />
                 <SetupFactors
-                    defaultFactor1={FACTOR_1_DEFAULT}
+                    defaultFactor1={game.factor1}
                     actionFactor1={setFactor1}
-                    defaultFactor2={FACTOR_2_DEFAULT}
+                    defaultFactor2={game.factor2}
                     actionFactor2={setFactor2}
                 />
                 <hr />
