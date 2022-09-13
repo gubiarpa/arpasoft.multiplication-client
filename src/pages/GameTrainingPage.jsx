@@ -7,13 +7,14 @@ import { mainStyle } from "../Constants/DefinedClasses"
 
 export const GameTrainingPage = () => {
 
-    const { game } = useContext(GameContext);
+    const { game, increaseCorrectAnswer, increaseWrongAnswer } = useContext(GameContext);
 
     const questionRef = useRef();
 
     const [leftMember, setLeftMember] = useState(0);
     const [rightMember, setRightMember] = useState(0);
     const [options, setOptions] = useState([]);
+
     const [disabledOptions, setDisabledOptions] = useState(false);
     const [showAnswer, setShowAnswer] = useState(false);
     const [classAnswer, setClassAnswer] = useState("");
@@ -37,6 +38,7 @@ export const GameTrainingPage = () => {
         setDisabledOptions(x => !x);
         const isCorrect = (leftMember * rightMember === choosedOption);
         setClassAnswer(isCorrect ? "text-success border-success" : "text-danger border-danger");
+        isCorrect ? increaseCorrectAnswer() : increaseWrongAnswer();
         setShowAnswer(true);
         setTimeout(() => {
             updateMembers();
@@ -48,37 +50,42 @@ export const GameTrainingPage = () => {
     }
 
     return (
-        <div className={mainStyle}>
-            <TitleForm
-                content={
-                    <>
-                        Be quick, <span className="text-capitalize">{game.user}</span>!
-                    </>
-                }
-            />
-            <div
-                ref={questionRef}
-                className={`mt-5 border border-primary fs-1 ${classAnswer}`}
-            >
-                {leftMember} x {rightMember}
-                {
-                    showAnswer && (<span> = {leftMember * rightMember}</span>)
-                }
+        <>
+            <div className={mainStyle}>
+                <TitleForm
+                    content={
+                        <>
+                            Be quick, <span className="text-capitalize">{game.user}</span>!
+                        </>
+                    }
+                />
+                <div
+                    ref={questionRef}
+                    className={`mt-5 border border-primary fs-1 ${classAnswer}`}
+                >
+                    {leftMember} x {rightMember}
+                    {
+                        showAnswer && (<span> = {leftMember * rightMember}</span>)
+                    }
+                </div>
+                <div className="mt-5 answers">
+                    {
+                        options.map((option, index) => (
+                            <button
+                                key={index}
+                                className="btn btn-primary option fs-5 border mx-2"
+                                onClick={(e) => handleNextQuestionClick(e, option)}
+                                disabled={disabledOptions}
+                            >
+                                {option}
+                            </button>
+                        ))
+                    }
+                </div>
             </div>
-            <div className="mt-5 answers">
-                {
-                    options.map((option, index) => (
-                        <button
-                            key={index}
-                            className="btn btn-primary option fs-5 border mx-2"
-                            onClick={(e) => handleNextQuestionClick(e, option)}
-                            disabled={disabledOptions}
-                        >
-                            {option}
-                        </button>
-                    ))
-                }
+            <div className="position-fixed bottom-0 end-0 translate-middle">
+                <div>Correctas: {game.correctAnswersCount} / Incorrectas: {game.wrongAnswersCount}</div>
             </div>
-        </div>
+        </>
     )
 }
