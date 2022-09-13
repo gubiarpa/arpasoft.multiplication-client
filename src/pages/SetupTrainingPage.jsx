@@ -38,7 +38,7 @@ export const SetupTrainingPage = () => {
     }, [factor2]);
 
     const handleContinueClick = () => {
-        navigate("/admit", { replace: true });
+        navigate("/game-training", { replace: true });
     }
 
     const handleBackClick = () => {
