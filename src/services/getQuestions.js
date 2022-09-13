@@ -7,12 +7,12 @@ export const getRandomInt = (max) => Math.floor(Math.random() * max);
 
 export const getRandomBetween = (min, max) => min + getRandomInt(max - min + 1);
 
-export const getMembers = (factor1, factor2) => ({
+export const getRandomMembers = (factor1, factor2) => ({
     member1: getRandomBetween(2, factor1),
     member2: getRandomBetween(2, factor2),
 })
 
-export const getQuestions = (member1, member2) => {
+export const getOptionsFromMembers = (member1, member2) => {
 
     // Mock
     const combination = [];
