@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { getOptionsFromMembers, getRandomMembers } from "../services/getQuestions";
 
 import { GameContext } from "../context/GameContext";
@@ -9,10 +9,13 @@ export const GameTrainingPage = () => {
 
     const { game } = useContext(GameContext);
 
+    const questionRef = useRef();
+
     const [leftMember, setLeftMember] = useState(0);
     const [rightMember, setRightMember] = useState(0);
     const [options, setOptions] = useState([]);
     const [disabledOptions, setDisabledOptions] = useState(false);
+    const [classAnswer, setClassAnswer] = useState("");
 
     useEffect(() => {
         updateMembers();
@@ -28,12 +31,18 @@ export const GameTrainingPage = () => {
         setRightMember(member2);
     }
 
-    const handleNextQuestionClick = (e) => {
+    const handleNextQuestionClick = (e, choosedOption) => {
         e.preventDefault();
         setDisabledOptions(x => !x);
+        setClassAnswer((leftMember * rightMember === choosedOption) ?
+            "text-success border-success" :
+            "text-danger border-danger"
+        );
         setTimeout(() => {
             updateMembers();
+            setClassAnswer("text-primary border-primary");
             setDisabledOptions(x => !x);
+            questionRef.current.focus();
         }, 1000);
     }
 
@@ -46,7 +55,10 @@ export const GameTrainingPage = () => {
                     </>
                 }
             />
-            <div className="mt-5 border border-primary fs-1">
+            <div
+                ref={questionRef}
+                className={`mt-5 border border-primary fs-1 ${classAnswer}`}
+            >
                 {leftMember} x {rightMember}
             </div>
             <div className="mt-5 answers">
@@ -54,8 +66,8 @@ export const GameTrainingPage = () => {
                     options.map((option, index) => (
                         <button
                             key={index}
-                            className="btn btn-outline-primary option fs-3 border mx-3"
-                            onClick={handleNextQuestionClick}
+                            className="btn btn-primary option fs-5 border mx-2"
+                            onClick={(e) => handleNextQuestionClick(e, option)}
                             disabled={disabledOptions}
                         >
                             {option}
