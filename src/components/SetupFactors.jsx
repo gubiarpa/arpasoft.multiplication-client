@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 
-const SetupFactors = ({ defaultFactor1, actionFactor1, defaultFactor2, actionFactor2 }) => {
+export const SetupFactors = ({ defaultFactor1, actionFactor1, defaultFactor2, actionFactor2 }) => {
 
     const [factor1, setFactor1] = useState(defaultFactor1);
     const [factor2, setFactor2] = useState(defaultFactor2);
@@ -59,5 +59,3 @@ const SetupFactors = ({ defaultFactor1, actionFactor1, defaultFactor2, actionFac
         </>
     )
 }
-
-export default SetupFactors

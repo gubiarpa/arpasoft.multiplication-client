@@ -12,19 +12,24 @@ export const MenuPage = () => {
         setUsername(() => (localStorage.getItem("username") ?? ""));
     }, []);
 
-    const handleCreateGameClick = () => {
+    const handleCreateGameClick = (e) => {
+        e.preventDefault();
         localStorage.setItem("roomcode", (1000 + Math.floor(Math.random() * 8999)));
         navigate("/create", { replace: true });
     }
-
-    const handleJoinGameClick = () => {
+    
+    const handleJoinGameClick = (e) => {
+        e.preventDefault();
         navigate("/join", { replace: true });
     }
-
-    const handleTrainingClick = () => {
+    
+    const handleTrainingClick = (e) => {
+        e.preventDefault();
+        navigate("/setup-training", { replace: true });
     }
-
-    const handleBackClick = () => {
+    
+    const handleBackClick = (e) => {
+        e.preventDefault();
         navigate("/", { replace: true });
     }
 
