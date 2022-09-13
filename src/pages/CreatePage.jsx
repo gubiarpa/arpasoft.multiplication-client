@@ -7,9 +7,13 @@ import SetupFactors from "../components/SetupFactors";
 export const CreatePage = () => {
 
     const navigate = useNavigate();
+
     const [roomCode, setRoomCode] = useState(0);
-    const [factor1, setFactor1] = useState(12);
-    const [factor2, setFactor2] = useState(12);
+
+    const FACTOR1_DEFAULT_VALUE = 12;
+    const FACTOR2_DEFAULT_VALUE = 12;
+    const [factor1, setFactor1] = useState(FACTOR1_DEFAULT_VALUE);
+    const [factor2, setFactor2] = useState(FACTOR2_DEFAULT_VALUE);
 
     useEffect(() => {
         const randomNumber = localStorage.getItem("roomcode") ?? (1000 + Math.floor(Math.random() * 8999));
@@ -19,14 +23,6 @@ export const CreatePage = () => {
     useEffect(() => {
         localStorage.setItem("roomcode", roomCode);
     }, [roomCode]);
-
-    const handleChangeFactor1 = ({ target }) => {
-        setFactor1(target.value);
-    }
-
-    const handleChangeFactor2 = ({ target }) => {
-        setFactor2(target.value);
-    }
 
     const handleContinueClick = () => {
         navigate("/admit", { replace: true });
@@ -43,10 +39,10 @@ export const CreatePage = () => {
                     Room <span className="fs-3">({roomCode})</span>
                 </div>
                 <SetupFactors
-                    factor1={factor1}
-                    handleChangeFactor1={handleChangeFactor1}
-                    factor2={factor2}
-                    handleChangeFactor2={handleChangeFactor2}
+                    defaultFactor1={FACTOR1_DEFAULT_VALUE}
+                    actionFactor1={setFactor1}
+                    defaultFactor2={FACTOR2_DEFAULT_VALUE}
+                    actionFactor2={setFactor2}
                 />
                 <hr />
 

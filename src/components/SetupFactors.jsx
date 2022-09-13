@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 
-const SetupFactors = ({
-    factor1 = 12, handleChangeFactor1 = () => { },
-    factor2 = 12, handleChangeFactor2 = () => { } }) => {
-        
+const SetupFactors = ({ defaultFactor1, actionFactor1, defaultFactor2, actionFactor2 }) => {
+
+    const [factor1, setFactor1] = useState(defaultFactor1);
+    const [factor2, setFactor2] = useState(defaultFactor2);
+
+    useEffect(() => {
+        actionFactor1(factor1);
+    }, [factor1]);
+
+    useEffect(() => {
+        actionFactor2(factor2);
+    }, [factor2]);
+
+    const handleChangeFactor1 = ({ target }) => {
+        setFactor1(target.value);
+        actionFactor1();
+    }
+
+    const handleChangeFactor2 = ({ target }) => {
+        setFactor2(target.value);
+        actionFactor2(target.value);
+    }
+
     return (
         <>
             <div className="my-5">
