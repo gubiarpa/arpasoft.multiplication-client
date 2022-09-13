@@ -18,3 +18,7 @@ body {
   letter-spacing: 3rem;
   padding-left: 3rem;
 }
+
+.option {
+  cursor: pointer;
+}

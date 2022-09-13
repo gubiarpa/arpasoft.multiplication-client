@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { AdmitPage } from "./pages/AdmitPage";
 import { CreatePage } from "./pages/CreatePage";
 import { GameProvider } from "./context/GameContext";
+import { GameTrainingPage } from "./pages/GameTrainingPage";
 import { JoinPage } from "./pages/JoinPage";
 import { MenuPage } from "./pages/MenuPage";
 import { SetupTrainingPage } from "./pages/SetupTrainingPage";
@@ -49,6 +50,10 @@ function App() {
                     <Route
                         path="/setup-training"
                         element={<SetupTrainingPage />}
+                    />
+                    <Route
+                        path="/game-training"
+                        element={<GameTrainingPage />}
                     />
                 </Routes>
             </div>

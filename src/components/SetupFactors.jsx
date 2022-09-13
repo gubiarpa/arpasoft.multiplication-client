@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { useEffect } from "react";
 
 export const SetupFactors = ({ defaultFactor1, actionFactor1, defaultFactor2, actionFactor2 }) => {
