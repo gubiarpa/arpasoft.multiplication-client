@@ -12,6 +12,7 @@ export const GameTrainingPage = () => {
     const [leftMember, setLeftMember] = useState(0);
     const [rightMember, setRightMember] = useState(0);
     const [options, setOptions] = useState([]);
+    const [disabledOptions, setDisabledOptions] = useState(false);
 
     useEffect(() => {
         updateMembers();
@@ -27,6 +28,15 @@ export const GameTrainingPage = () => {
         setRightMember(member2);
     }
 
+    const handleNextQuestionClick = (e) => {
+        e.preventDefault();
+        setDisabledOptions(x => !x);
+        setTimeout(() => {
+            updateMembers();
+            setDisabledOptions(x => !x);
+        }, 1000);
+    }
+
     return (
         <div className={mainStyle}>
             <TitleForm
@@ -39,19 +49,17 @@ export const GameTrainingPage = () => {
             <div className="mt-5 border border-primary fs-1">
                 {leftMember} x {rightMember}
             </div>
-            <div className="mt-5 answers fs-4">
+            <div className="mt-5 answers">
                 {
                     options.map((option, index) => (
-                        <div
+                        <button
                             key={index}
-                            className="option border mt-3 text-secondary"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                updateMembers();                                
-                            }}
+                            className="btn btn-outline-primary option fs-3 border mx-3"
+                            onClick={handleNextQuestionClick}
+                            disabled={disabledOptions}
                         >
                             {option}
-                        </div>
+                        </button>
                     ))
                 }
             </div>
