@@ -6,6 +6,7 @@ import { JoinPage } from "./pages/JoinPage";
 import { MenuPage } from "./pages/MenuPage";
 import { StartingPage } from "./pages/StartingPage";
 import { SetupTrainingPage } from "./pages/SetupTrainingPage";
+import { UserProvider } from "./context/UserContext";
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
     }
 
     return (
-        <>
+        <UserProvider>
             <div className="m-3 text-center ">
                 <div className="text-start">
                     <h1 className="title-game text-danger" onClick={handleLogoClick}>
@@ -50,7 +51,7 @@ function App() {
                     />
                 </Routes>
             </div>
-        </>
+        </UserProvider>
     );
 }
 
