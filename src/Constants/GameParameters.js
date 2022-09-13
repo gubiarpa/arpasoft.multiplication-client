@@ -1,2 +1,2 @@
-export const factor1ByDefault = 12;
-export const factor2ByDefault = 12;
+export const FACTOR_1_DEFAULT = 12;
+export const FACTOR_2_DEFAULT = 12;

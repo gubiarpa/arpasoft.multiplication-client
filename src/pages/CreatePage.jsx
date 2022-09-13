@@ -1,51 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { SetupFactors } from "../components/SetupFactors";
+import { FACTOR_1_DEFAULT, FACTOR_2_DEFAULT } from "../Constants/GameParameters";
+import React, { useContext, useEffect, useState } from "react";
+
 import { ActionStep } from "../components/ActionStep";
-import { factor1ByDefault, factor2ByDefault } from "../Constants/GameParameters";
+import { GameContext } from "../context/GameContext";
+import { SetupFactors } from "../components/SetupFactors";
+import { getRoomCode } from "../services/getRoomCode";
+import { useNavigate } from "react-router-dom";
 
 export const CreatePage = () => {
 
+    const { game, setGameRoom, setGameFactor1, setGameFactor2 } = useContext(GameContext);
+
     const navigate = useNavigate();
 
-    const [roomCode, setRoomCode] = useState(0);
-
-    const [factor1, setFactor1] = useState(factor1ByDefault);
-    const [factor2, setFactor2] = useState(factor2ByDefault);
+    const [factor1, setFactor1] = useState(FACTOR_1_DEFAULT);
+    const [factor2, setFactor2] = useState(FACTOR_2_DEFAULT);
 
     useEffect(() => {
-        const randomNumber = localStorage.getItem("roomcode") ?? (1000 + Math.floor(Math.random() * 8999));
-        setRoomCode(() => randomNumber);
+        if (!game.user) {
+            navigate("/", { replace: true });
+        }
+        const roomCode = getRoomCode();
+        setGameRoom(roomCode);
     }, []);
-
-    useEffect(() => {
-        localStorage.setItem("roomcode", roomCode);
-    }, [roomCode]);
-
-    const handleContinueClick = () => {
-        navigate("/admit", { replace: true });
-    }
-
-    const handleBackClick = () => {
-        navigate("/menu", { replace: true });
-    }
 
     return (
         <>
             <div className="position-absolute top-50 start-50 translate-middle col-10 col-md-4">
                 <div className="fs-1 text-secondary text-reset">
-                    Room <span className="fs-3">({roomCode})</span>
+                    Room <span className="fs-3">({game.room})</span> for {game.user}
                 </div>
                 <SetupFactors
-                    defaultFactor1={factor1ByDefault}
+                    defaultFactor1={FACTOR_1_DEFAULT}
                     actionFactor1={setFactor1}
-                    defaultFactor2={factor2ByDefault}
+                    defaultFactor2={FACTOR_2_DEFAULT}
                     actionFactor2={setFactor2}
                 />
                 <hr />
                 <ActionStep
-                    actionContinue={handleContinueClick}
-                    actionBack={handleBackClick}
+                    actionContinue={() => { navigate("/admit", { replace: true }); }}
+                    actionBack={() => { navigate("/menu", { replace: true }); }}
                 />
             </div>
         </>

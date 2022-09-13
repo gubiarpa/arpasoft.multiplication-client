@@ -1,15 +1,16 @@
+import { FACTOR_1_DEFAULT, FACTOR_2_DEFAULT } from "../Constants/GameParameters";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { ActionStep } from "../components/ActionStep";
 import { SetupFactors } from "../components/SetupFactors";
-import { factor1ByDefault, factor2ByDefault } from "../Constants/GameParameters";
+import { useNavigate } from "react-router-dom";
 
 export const SetupTrainingPage = ({ fa }) => {
 
     const navigate = useNavigate();
 
-    const [factor1, setFactor1] = useState(factor1ByDefault);
-    const [factor2, setFactor2] = useState(factor2ByDefault);
+    const [factor1, setFactor1] = useState(FACTOR_1_DEFAULT);
+    const [factor2, setFactor2] = useState(FACTOR_2_DEFAULT);
 
     const handleContinueClick = () => {
         navigate("/admit", { replace: true });
@@ -26,9 +27,9 @@ export const SetupTrainingPage = ({ fa }) => {
                     Training
                 </div>
                 <SetupFactors
-                    defaultFactor1={factor1ByDefault}
+                    defaultFactor1={FACTOR_1_DEFAULT}
                     actionFactor1={setFactor1}
-                    defaultFactor2={factor2ByDefault}
+                    defaultFactor2={FACTOR_2_DEFAULT}
                     actionFactor2={setFactor2}
                 />
                 <hr />

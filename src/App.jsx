@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+
 import { AdmitPage } from "./pages/AdmitPage";
 import { CreatePage } from "./pages/CreatePage";
+import { GameProvider } from "./context/GameContext";
 import { JoinPage } from "./pages/JoinPage";
 import { MenuPage } from "./pages/MenuPage";
-import { StartingPage } from "./pages/StartingPage";
 import { SetupTrainingPage } from "./pages/SetupTrainingPage";
-import { UserProvider } from "./context/UserContext";
+import { StartingPage } from "./pages/StartingPage";
+import { useNavigate } from "react-router-dom";
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
     }
 
     return (
-        <UserProvider>
+        <GameProvider>
             <div className="m-3 text-center ">
                 <div className="text-start">
                     <h1 className="title-game text-danger" onClick={handleLogoClick}>
@@ -51,7 +52,7 @@ function App() {
                     />
                 </Routes>
             </div>
-        </UserProvider>
+        </GameProvider>
     );
 }
 
