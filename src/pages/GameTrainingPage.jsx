@@ -15,6 +15,7 @@ export const GameTrainingPage = () => {
     const [rightMember, setRightMember] = useState(0);
     const [options, setOptions] = useState([]);
     const [disabledOptions, setDisabledOptions] = useState(false);
+    const [showAnswer, setShowAnswer] = useState(false);
     const [classAnswer, setClassAnswer] = useState("");
 
     useEffect(() => {
@@ -34,13 +35,13 @@ export const GameTrainingPage = () => {
     const handleNextQuestionClick = (e, choosedOption) => {
         e.preventDefault();
         setDisabledOptions(x => !x);
-        setClassAnswer((leftMember * rightMember === choosedOption) ?
-            "text-success border-success" :
-            "text-danger border-danger"
-        );
+        const isCorrect = (leftMember * rightMember === choosedOption);
+        setClassAnswer(isCorrect ? "text-success border-success" : "text-danger border-danger");
+        setShowAnswer(!isCorrect);
         setTimeout(() => {
             updateMembers();
             setClassAnswer("text-primary border-primary");
+            setShowAnswer(false);
             setDisabledOptions(x => !x);
             questionRef.current.focus();
         }, 1000);
@@ -60,6 +61,9 @@ export const GameTrainingPage = () => {
                 className={`mt-5 border border-primary fs-1 ${classAnswer}`}
             >
                 {leftMember} x {rightMember}
+                {
+                    showAnswer && (<span> = {leftMember * rightMember}</span>)
+                }
             </div>
             <div className="mt-5 answers">
                 {
