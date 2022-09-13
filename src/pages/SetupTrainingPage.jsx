@@ -5,6 +5,7 @@ import { ActionStep } from "../components/ActionStep";
 import { GameContext } from "../context/GameContext";
 import { SetupFactors } from "../components/SetupFactors";
 import { TitleForm } from "../components/TitleForm";
+import { mainStyle } from "../Constants/DefinedClasses";
 import { useNavigate } from "react-router-dom";
 
 export const SetupTrainingPage = ({ fa }) => {
@@ -26,7 +27,7 @@ export const SetupTrainingPage = ({ fa }) => {
 
     return (
         <>
-            <div className="position-absolute top-50 start-50 translate-middle col-10 col-md-4">
+            <div className={mainStyle}>
                 <TitleForm
                     content={
                         <>
