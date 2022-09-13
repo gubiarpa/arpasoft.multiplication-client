@@ -37,7 +37,7 @@ export const GameTrainingPage = () => {
         setDisabledOptions(x => !x);
         const isCorrect = (leftMember * rightMember === choosedOption);
         setClassAnswer(isCorrect ? "text-success border-success" : "text-danger border-danger");
-        setShowAnswer(!isCorrect);
+        setShowAnswer(true);
         setTimeout(() => {
             updateMembers();
             setClassAnswer("text-primary border-primary");
