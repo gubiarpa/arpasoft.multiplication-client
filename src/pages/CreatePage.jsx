@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ActionStep } from "../components/ActionStep";
 import { GameContext } from "../context/GameContext";
 import { SetupFactors } from "../components/SetupFactors";
+import { TitleForm } from "../components/TitleForm";
 import { getRoomCode } from "../services/getRoomCode";
 import { useNavigate } from "react-router-dom";
 
@@ -27,8 +28,14 @@ export const CreatePage = () => {
     return (
         <>
             <div className="position-absolute top-50 start-50 translate-middle col-10 col-md-4">
+                <TitleForm
+                    content={
+                        <>
+                            Let's start, <span className="text-capitalize">{game.user}</span>! <span className="fs-4">({game.room})</span>
+                        </>
+                    }
+                />
                 <div className="fs-1 text-secondary text-reset">
-                    Room <span className="fs-3">({game.room})</span> for {game.user}
                 </div>
                 <SetupFactors
                     defaultFactor1={FACTOR_1_DEFAULT}

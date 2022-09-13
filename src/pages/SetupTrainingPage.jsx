@@ -1,11 +1,15 @@
 import { FACTOR_1_DEFAULT, FACTOR_2_DEFAULT } from "../Constants/GameParameters";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { ActionStep } from "../components/ActionStep";
+import { GameContext } from "../context/GameContext";
 import { SetupFactors } from "../components/SetupFactors";
+import { TitleForm } from "../components/TitleForm";
 import { useNavigate } from "react-router-dom";
 
 export const SetupTrainingPage = ({ fa }) => {
+
+    const { game } = useContext(GameContext);
 
     const navigate = useNavigate();
 
@@ -23,9 +27,13 @@ export const SetupTrainingPage = ({ fa }) => {
     return (
         <>
             <div className="position-absolute top-50 start-50 translate-middle col-10 col-md-4">
-                <div className="fs-1 text-secondary text-reset">
-                    Training
-                </div>
+                <TitleForm
+                    content={
+                        <>
+                            Let's train, <span className="text-capitalize">{game.user}</span>!
+                        </>
+                    }
+                />
                 <SetupFactors
                     defaultFactor1={FACTOR_1_DEFAULT}
                     actionFactor1={setFactor1}
