@@ -6,19 +6,21 @@ import { useNavigate } from "react-router-dom";
 
 export const StartingPage = () => {
 
-    const { setGameUser } = useContext(GameContext);
-    
+    const { game, setGameUser } = useContext(GameContext);
+
     const inputRef = useRef();
     const navigate = useNavigate();
 
     const {
         username = "",
         onInputChange,
+        setFieldState
     } = useForm({
         username: ""
     });
 
     useEffect(() => {
+        setFieldState({ name: "username", value: game.user });
         inputRef.current.select();
     }, []);
 
